@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
@@ -11,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import models.Skill;
 import models.User;
 import repositories.Repository;
 
@@ -51,8 +54,25 @@ public class RegistrationServlet extends HttpServlet {
 			rd.include(request, response);
 		}
 		else {
-			User user = new User(personalName, username, password);
 			if(collection.getUserByUsername(username)==null) {
+				
+				User user = new User(personalName, username, password);
+				
+				List<Skill> profSkill = new ArrayList<Skill>();
+				profSkill.add(new Skill());
+				profSkill.add(new Skill());
+				profSkill.add(new Skill());
+				profSkill.add(new Skill());
+				
+				user.setProfSkill(profSkill);
+				
+				List<Skill> personalSkill = new ArrayList<Skill>();
+				personalSkill.add(new Skill());
+				personalSkill.add(new Skill());
+				personalSkill.add(new Skill());
+				
+				user.setPersonalSkill(personalSkill);
+				
 				collection.addUser(user);
 			//out.print("<html><body><p>Успешно регистриран потребител!</p></body></html>");
 								
